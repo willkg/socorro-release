@@ -10,21 +10,22 @@ This script handles releases for this project.
 This has two subcommands: ``make-bug`` and ``make-tag``. See the help text for
 both.
 
-This requires Python 3 and the requests library to run.
+This requires Python 3 to run.
 
-Get an updated version at: https://github.com/willkg/socorro-release/
+repo: https://github.com/willkg/socorro-release/
+sha: $SHA$
 
 """
 
 import argparse
 import datetime
+import json
 import os
 import shlex
 import subprocess
 import sys
+from urllib.request import urlopen
 from urllib.parse import urlencode
-
-import requests
 
 
 GITHUB_API = "https://api.github.com/"
@@ -34,12 +35,17 @@ BZ_URL = "https://bugzilla.mozilla.org/enter_bug.cgi"
 
 
 def fetch(url, is_json=True):
-    """Fetch data from a url"""
-    resp = requests.get(url)
-    assert resp.status_code == 200, f"{resp.status_code} {resp.content}"
+    """Fetch data from a url
+
+    This raises URLError on HTTP request errors. It also raises JSONDecode
+    errors if it's not valid JSON.
+
+    """
+    fp = urlopen(url)
+    data = fp.read()
     if is_json:
-        return resp.json()
-    return resp.content
+        return json.loads(data)
+    return data
 
 
 def fetch_history_from_github(owner, repo, from_tag):
@@ -225,7 +231,7 @@ def run():
         commits_since_tag.append("`%s`: %s (%s)" % (sha, summary, who))
 
     # Use specified tag or figure out next tag name as YYYY.MM.DD format
-    if args.tag:
+    if args.cmd == "make-tag" and args.tag:
         tag_name = args.tag
     else:
         tag_name = datetime.datetime.now().strftime("%Y.%m.%d")
