@@ -10,7 +10,7 @@ This script handles releases for this project.
 This has two subcommands: ``make-bug`` and ``make-tag``. See the help text for
 both.
 
-This requires Python 3 to run.
+This requires Python 3 and git to run.
 
 repo: https://github.com/willkg/socorro-release/
 sha: $SHA$
