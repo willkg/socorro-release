@@ -12,7 +12,12 @@ If you don't work with me, it's unlikely this will be interesting to you.
 Install
 =======
 
-Copy the file into wherever you need it.
+To install, do this::
+
+    install_into.sh DESTDIR
+
+This will copy the ``release.py`` script into the DESTDIR and update the
+``$SHA$`` so you know which version you installed.
 
 
 Usage
