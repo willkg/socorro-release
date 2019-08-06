@@ -20,6 +20,27 @@ This will copy the ``release.py`` script into the DESTDIR and update the
 ``$SHA$`` so you know which version you installed.
 
 
+Configuration
+=============
+
+Configure ``release.py`` by adding a ``[tools:release]`` section to the
+``setup.cfg`` file in the current working directory.
+
+Keys:
+
+``github_user``
+    The GitHub user/organization for the project.
+
+``github_project``
+    The project name on GitHub.
+
+``bugzilla_product`` (optional)
+    The product for this project in Bugzilla.
+
+``bugzilla_component`` (optional)
+    The component for this project in Bugzilla.
+
+
 Usage
 =====
 
@@ -28,12 +49,11 @@ make-bug
 
 Create a deploy bug::
 
-    $ release.py make-bug [--product PRODUCT] [--component COMPONENT]
+    $ release.py make-bug
  
-This will generate a link for Mozilla's Bugzilla instance.
-
-If you don't want to use that, that's fine. You can skip specifying the
-product and component and instead copy/paste the summary and description.
+This will generate a summary and description for a deploy bug. It also
+generates a link to Mozilla's Bugzilla instance for creating the deploy bug. If
+you don't want to use the link, that's fine--you can ignore it.
 
 
 make-tag
