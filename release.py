@@ -52,7 +52,7 @@ LINE = "=" * 80
 def get_config():
     """Generates configuration.
 
-    This tries to pull from the [tools:release] section of a setup.cfg in the
+    This tries to pull from the [tool:release] section of a setup.cfg in the
     working directory. If that doesn't exist, then it uses defaults.
 
     :returns: configuration dict
@@ -66,10 +66,10 @@ def get_config():
     config = configparser.ConfigParser()
     config.read("setup.cfg")
 
-    if "tools:release" not in config:
+    if "tool:release" not in config:
         return my_config
 
-    config = config["tools:release"]
+    config = config["tool:release"]
     for key in my_config.keys():
         my_config[key] = config.get(key, "")
 

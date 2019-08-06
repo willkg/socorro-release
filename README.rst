@@ -23,7 +23,7 @@ This will copy the ``release.py`` script into the DESTDIR and update the
 Configuration
 =============
 
-Configure ``release.py`` by adding a ``[tools:release]`` section to the
+Configure ``release.py`` by adding a ``[tool:release]`` section to the
 ``setup.cfg`` file in the current working directory.
 
 Keys:
@@ -45,7 +45,7 @@ Example ``setup.cfg`` for this project:
 
 ::
 
-   [tools:release]
+   [tool:release]
    github_user = willkg
    github_project = socorro-release
 
