@@ -14,7 +14,7 @@ Install
 
 To install, do this::
 
-    install_into.sh DESTDIR
+   install_into.sh DESTDIR
 
 This will copy the ``release.py`` script into the DESTDIR and update the
 ``$SHA$`` so you know which version you installed.
@@ -29,16 +29,25 @@ Configure ``release.py`` by adding a ``[tools:release]`` section to the
 Keys:
 
 ``github_user``
-    The GitHub user/organization for the project.
+   The GitHub user/organization for the project.
 
 ``github_project``
-    The project name on GitHub.
+   The project name on GitHub.
 
 ``bugzilla_product`` (optional)
-    The product for this project in Bugzilla.
+   The product for this project in Bugzilla.
 
 ``bugzilla_component`` (optional)
-    The component for this project in Bugzilla.
+   The component for this project in Bugzilla.
+
+
+Example ``setup.cfg`` for this project:
+
+::
+
+   [tools:release]
+   github_user = willkg
+   github_project = socorro-release
 
 
 Usage
@@ -49,7 +58,7 @@ make-bug
 
 Create a deploy bug::
 
-    $ release.py make-bug
+   $ release.py make-bug
  
 This will generate a summary and description for a deploy bug. It also
 generates a link to Mozilla's Bugzilla instance for creating the deploy bug. If
@@ -61,7 +70,7 @@ make-tag
 
 Tags the repo for a deploy::
 
-    $ release.py make-tag [--with-bug BUGID] [--with-tag TAG]
+   $ release.py make-tag [--with-bug BUGID] [--with-tag TAG]
 
 The bug id is free form, so it'll work with Mozilla's Bugzilla or GitHub
 issues or whatever.
