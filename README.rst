@@ -34,12 +34,16 @@ Keys:
 ``github_project``
    The project name on GitHub.
 
+``main_branch``
+   The name of the main branch to compare against and tag.
+
 ``bugzilla_product`` (optional)
-   The product for this project in Bugzilla.
+   The product for this project in Bugzilla. You only need to set this
+   if you're going to call ``make-bug``.
 
 ``bugzilla_component`` (optional)
-   The component for this project in Bugzilla.
-
+   The component for this project in Bugzilla. You only need to set this
+   if you're going to call ``make-bug``.
 
 Example ``setup.cfg`` for this project:
 
@@ -48,6 +52,7 @@ Example ``setup.cfg`` for this project:
    [tool:release]
    github_user = willkg
    github_project = socorro-release
+   main_branch = main
 
 
 Usage
@@ -82,7 +87,7 @@ History
 =======
 
 This is loosely based on a deploy-bug script I wrote and Peter's make-tag
-script. I merged them together and rewrote some bits and that's what we've
-got now.
+script. I merged them together and rewrote some bits and that's what we've got
+now.
 
 Many thanks to Peter for his work on make-tag!
