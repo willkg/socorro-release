@@ -245,7 +245,9 @@ def run():
     remote_name = get_remote_name(github_user)
 
     # Get existing git tags from remote
-    check_output(f"git pull {remote_name} {main_branch} --tags", stderr=subprocess.STDOUT)
+    check_output(
+        f"git pull {remote_name} {main_branch} --tags", stderr=subprocess.STDOUT
+    )
 
     # Figure out the most recent tag details
     last_tag = check_output(
@@ -259,7 +261,9 @@ def run():
         print(last_tag_message)
         print(LINE)
 
-        resp = fetch_history_from_github(github_user, github_project, last_tag, main_branch)
+        resp = fetch_history_from_github(
+            github_user, github_project, last_tag, main_branch
+        )
         if resp["status"] != "ahead":
             print(f"Nothing to deploy! {resp['status']}")
             return
