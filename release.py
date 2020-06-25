@@ -228,7 +228,8 @@ def run():
     current_branch = check_output("git rev-parse --abbrev-ref HEAD")
     if current_branch != main_branch:
         print(
-            f"Must be on the {main_branch} branch to do this; currently on {current_branch}"
+            f"Must be on the {main_branch} branch to do this;"
+            f" currently on {current_branch}"
         )
         return 1
 
