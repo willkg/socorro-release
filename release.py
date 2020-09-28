@@ -129,7 +129,7 @@ def get_remote_name(github_user):
 
 def make_tag(bug_number, remote_name, tag_name, commits_since_tag):
     """Tags a release."""
-    message = "\n".join(commits_since_tag)
+    message = "Tagged %s\n\n%s" % (tag_name, "\n".join(commits_since_tag))
 
     if bug_number:
         # Add bug number to tag
