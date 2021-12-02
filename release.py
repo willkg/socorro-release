@@ -158,7 +158,7 @@ def make_tag(bug_number, remote_name, tag_name, commits_since_tag):
         print(">>> %<-----------------------------------------------")
         output = check_output(f"git show {tag_name}")
         # Truncate the output at "diff --git"
-        output = output[:output.find("diff --git")].strip()
+        output = output[: output.find("diff --git")].strip()
         print(f"Tagged {tag_name}:")
         print("")
         print("```")
