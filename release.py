@@ -35,7 +35,8 @@ deploys. For help, see: https://github.com/willkg/socorro-release/
 """
 
 GITHUB_API = "https://api.github.com/"
-BZ_URL = "https://bugzilla.mozilla.org/enter_bug.cgi"
+BZ_CREATE_URL = "https://bugzilla.mozilla.org/enter_bug.cgi"
+BZ_BUG_JSON_URL = "https://bugzilla.mozilla.org/rest/bug/"
 
 DEFAULT_CONFIG = {
     # Bugzilla product and component to write new bugs in
@@ -130,6 +131,11 @@ def get_remote_name(github_user):
 def make_tag(bug_number, remote_name, tag_name, commits_since_tag):
     """Tags a release."""
     if bug_number:
+        resp = fetch(BZ_BUG_JSON_URL + bug_number, is_json=True)
+        bug_summary = resp["bugs"][0]["summary"]
+
+        input(f">>> Using bug {bug_number}: {bug_summary}. Correct? Ctrl-c to cancel")
+
         message = (
             f"Tag {tag_name} (bug #{bug_number})\n\n"
             + "\n".join(commits_since_tag)
@@ -206,7 +212,7 @@ def make_bug(
         if bugzilla_component:
             bz_params["component"] = bugzilla_component
 
-        bugzilla_link = BZ_URL + "?" + urlencode(bz_params)
+        bugzilla_link = BZ_CREATE_URL + "?" + urlencode(bz_params)
         print(">>> Link to create bug (may not work if it's sufficiently long)")
         print(bugzilla_link)
 
@@ -215,6 +221,10 @@ def run():
     config = get_config()
 
     parser = argparse.ArgumentParser(description=DESCRIPTION)
+
+    # Add items that can be configured to argparse as configuration options.
+    # This makes it possible to specify or override configuration with command
+    # line arguments.
     for key, val in config.items():
         key = key.replace("_", "-")
         parser.add_argument(f"--{key}", default=val)
@@ -335,6 +345,12 @@ def run():
         )
 
     elif args.cmd == "make-tag":
+        if args.bugzilla_product and args.bugzilla_component and not args.bug:
+            print(
+                "Bugzilla product and component are specified, but you didn't "
+                + "specify a bug number with --with-bug."
+            )
+            return 1
         make_tag(args.bug, remote_name, tag_name, commits_since_tag)
 
     else:
