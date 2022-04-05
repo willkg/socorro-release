@@ -136,10 +136,7 @@ def make_tag(bug_number, remote_name, tag_name, commits_since_tag):
             + f"\n\nDeploy bug #{bug_number}"
         )
     else:
-        message = (
-            f"Tag {tag_name}\n\n"
-            + "\n".join(commits_since_tag)
-        )
+        message = f"Tag {tag_name}\n\n" + "\n".join(commits_since_tag)
 
     # Print out new tag information
     print(">>> New tag: %s" % tag_name)
@@ -198,6 +195,7 @@ def make_bug(
 
     if bugzilla_product:
         bz_params = {
+            "priority": "P2",
             "bug_type": "task",
             "comment": description,
             "form_name": "enter_bug",
