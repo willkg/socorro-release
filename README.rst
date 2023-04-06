@@ -45,6 +45,16 @@ Keys:
    The component for this project in Bugzilla. You only need to set this
    if you're going to call ``make-bug``.
 
+``tag_name_template`` (optional)
+   The template to use for building tag names. This uses datetime formatting
+   tokens.
+
+   Defaults to ``%Y.%m.%d``
+
+   Note: If you're using ``setup.cfg``, you need to use ``%%`` so the ``%``
+   doesn't get interpolated.
+
+
 Example ``setup.cfg`` for this project:
 
 ::
