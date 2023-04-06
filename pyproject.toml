@@ -17,3 +17,8 @@ docstring-quotes = "double"
 [tool.black]
 line-length = 88
 target-version = ["py37"]
+
+
+[tool.release]
+github_user = "willkg"
+github_project = "socorro-release"
