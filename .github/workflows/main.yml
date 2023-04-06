@@ -20,8 +20,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements-dev.txt
 
-      - name: Lint (flake8)
-        run: flake8 release.py
-
-      - name: Lint (black)
-        run: black --check --line-length=88 --target-version=py36 release.py
+      - name: Lint
+        run: |
+          black --check release.py
+          ruff release.py
