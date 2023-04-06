@@ -23,8 +23,18 @@ This will copy the ``release.py`` script into the DESTDIR and update the
 Configuration
 =============
 
-Configure ``release.py`` by adding a ``[tool:release]`` section to the
-``setup.cfg`` file in the current working directory.
+Configure ``release.py`` in a few different ways:
+
+1. A ``[tool.release]`` section in a ``pyproject.toml`` file in the current
+   working directory. (If you're using Python <3.11, this requires the
+   ``tomli`` library.)
+
+   **OR**
+
+   A ``[tool:release]`` section in a ``setup.cfg`` file in the current working
+   directory.
+
+2. Overridden by command-line arguments.
 
 Keys:
 
@@ -55,14 +65,27 @@ Keys:
    doesn't get interpolated.
 
 
+Example ``pyproject.toml`` for this project:
+
+::
+
+   [tool.release]
+   github_user = "willkg"
+   github_project = "socorro-release"
+   main_branch = "main"
+   tag_name_template = "%Y.%m.%d"
+
+
 Example ``setup.cfg`` for this project:
 
 ::
 
    [tool:release]
-   github_user = willkg
-   github_project = socorro-release
-   main_branch = main
+   github_user = "willkg"
+   github_project = "socorro-release"
+   main_branch = "main"
+   # Note that you have to double the % characters.
+   tag_name_template = "%%Y.%%m.%%d"
 
 
 Usage
