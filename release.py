@@ -242,7 +242,7 @@ def run():
     make_tag_parser.add_argument(
         "--with-tag",
         dest="tag",
-        help="Tag to use; defaults to figuring out the tag using tag_name_template."
+        help="Tag to use; defaults to figuring out the tag using tag_name_template.",
     )
 
     args = parser.parse_args()
