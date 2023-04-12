@@ -318,10 +318,9 @@ def run():
     )
 
     # Figure out the most recent tag details
-    last_tag = check_output(
-        "git for-each-ref --sort=-taggerdate --count=1 --format %(tag) refs/tags"
-    )
-    if last_tag:
+    all_tags = check_output("git tag --list --sort=-creatordate").splitlines()
+    if all_tags:
+        last_tag = all_tags[0]
         last_tag_message = check_output(f'git tag -l --format="%(contents)" {last_tag}')
         print(f">>> Last tag was: {last_tag}")
         print(">>> Message:")
