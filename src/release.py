@@ -15,6 +15,8 @@ This requires Python 3 to run.
 If you want to use ``pyproject.toml`` and you're using Python <3.11, this also
 requires the tomli library.
 
+See https://github.com/willkg/socorro-release/#readme for details.
+
 repo: https://github.com/willkg/socorro-release/
 sha: $SHA$
 
@@ -34,7 +36,9 @@ from urllib.parse import urlencode
 
 DESCRIPTION = """
 release.py makes it easier to create deploy bugs and push tags to trigger
-deploys. For help, see: https://github.com/willkg/socorro-release/
+deploys.
+
+For help, see: https://github.com/willkg/socorro-release/
 """
 
 GITHUB_API = "https://api.github.com/"
