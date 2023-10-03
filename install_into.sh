@@ -19,3 +19,6 @@ sed "s/\\\$SHA\\\$/$SHA/" < src/release.py > "${DEST}/release.py"
 
 echo "Copying service-status.py ${SHA} to ${DEST}/service-status.py ..."
 sed "s/\\\$SHA\\\$/$SHA/" < src/service-status.py > "${DEST}/service-status.py"
+
+echo "Copying license-check.py ${SHA} to ${DEST}/license-check.py ..."
+sed "s/\\\$SHA\\\$/$SHA/" < src/license-check.py > "${DEST}/license-check.py"

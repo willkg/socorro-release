@@ -88,6 +88,10 @@ Example ``setup.cfg`` for this project:
    tag_name_template = "%%Y.%%m.%%d"
 
 
+For command help::
+
+   $ release.py --help
+
 **make-bug**
 
 Create a deploy bug::
@@ -148,6 +152,20 @@ Example ``pyproject.toml``:
        "stage=https://crash-stats.allizom.org",
        "prod=https://crash-stats.mozilla.org",
    ]
+
+For command help::
+
+   $ service-status.py --help
+
+
+license-check.py
+================
+
+Checks source files for license header.
+
+For command help::
+
+   $ license-check.py --help
 
 
 History
