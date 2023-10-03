@@ -20,8 +20,8 @@ This will copy the ``release.py`` script into the DESTDIR and update the
 ``$SHA$`` so you know which version you installed.
 
 
-Configuration
-=============
+release.py
+==========
 
 Configure ``release.py`` in a few different ways:
 
@@ -88,11 +88,11 @@ Example ``setup.cfg`` for this project:
    tag_name_template = "%%Y.%%m.%%d"
 
 
-Usage
-=====
+For command help::
 
-make-bug
---------
+   $ release.py --help
+
+**make-bug**
 
 Create a deploy bug::
 
@@ -103,8 +103,7 @@ generates a link to Mozilla's Bugzilla instance for creating the deploy bug. If
 you don't want to use the link, that's fine--you can ignore it.
 
 
-make-tag
---------
+**make-tag**
 
 Tags the repo for a deploy::
 
@@ -116,11 +115,66 @@ issues or whatever.
 If you don't specify a tag, it'll figure one out.
 
 
+service-status.py
+=================
+
+Configure ``service-status.py`` in a couple of different ways:
+
+1. A ``[tool.service-status]`` section in a ``pyproject.toml`` file in the
+   current working directory. (If you're using Python <3.11, this requires the
+   ``tomli`` library.)
+
+2. Overridden by command-line arguments.
+
+Keys:
+
+``main_branch``
+   The name of the main branch in the git repository.
+
+``hosts``
+   A list of hosts which have a ``/__version__`` Dockerflow endpoint in the
+   form of::
+
+       ENVIRONMENTNAME=HOST
+
+   For example::
+
+       prod=https://crash-stats.mozilla.org
+
+
+Example ``pyproject.toml``:
+
+::
+
+   [tool.service-status]
+   main_branch = "main"
+   hosts = [
+       "stage=https://crash-stats.allizom.org",
+       "prod=https://crash-stats.mozilla.org",
+   ]
+
+For command help::
+
+   $ service-status.py --help
+
+
+license-check.py
+================
+
+Checks source files for license header.
+
+For command help::
+
+   $ license-check.py --help
+
+
 History
 =======
 
-This is loosely based on a deploy-bug script I wrote and Peter's make-tag
-script. I merged them together and rewrote some bits and that's what we've got
-now.
+``release.py`` is loosely based on a deploy-bug script I wrote and Peter's
+make-tag script. I merged them together and rewrote some bits and that's what
+we've got now.
 
 Many thanks to Peter for his work on make-tag!
+
+``service-status.py`` is a script I wrote that I use for multiple services.

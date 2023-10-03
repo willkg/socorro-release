@@ -7,5 +7,5 @@ help:
 
 .PHONY: lint
 lint:  ## Lint and black reformat files
-	black release.py
-	ruff release.py
+	black src/
+	ruff src/
