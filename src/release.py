@@ -97,6 +97,7 @@ def get_config():
             if config_data:
                 for key, default_val in my_config.items():
                     my_config[key] = config_data.get(key, default_val)
+                return my_config
 
     if os.path.exists("setup.cfg"):
         config = configparser.ConfigParser()
