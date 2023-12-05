@@ -345,7 +345,7 @@ def run():
         resp = fetch_history_from_github(github_user, github_project, first_commit)
 
     commits_since_tag = []
-    bug_name_prefix_regexp = re.compile(re.escape('bug-'), re.IGNORECASE)
+    bug_name_prefix_regexp = re.compile(re.escape('bug-[\d]+'), re.IGNORECASE)
     for commit in resp["commits"]:
         # Skip merge commits
         if len(commit["parents"]) > 1:
