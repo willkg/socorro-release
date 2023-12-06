@@ -345,7 +345,7 @@ def run():
         resp = fetch_history_from_github(github_user, github_project, first_commit)
 
     commits_since_tag = []
-    bug_name_prefix_regexp = re.compile(re.escape('bug-[\d]+'), re.IGNORECASE)
+    bug_name_prefix_regexp = re.compile(re.escape("bug-[\d]+"), re.IGNORECASE)
     for commit in resp["commits"]:
         # Skip merge commits
         if len(commit["parents"]) > 1:
@@ -361,7 +361,7 @@ def run():
         summary = summary[:80]
         # Bug 1868455: While GitHub autolinking doesn't suport spaces, Bugzilla autolinking
         # doesn't support hyphens.
-        summary = bug_name_prefix_regexp.sub('bug ', summary)
+        summary = bug_name_prefix_regexp.sub("bug ", summary)
 
         # Figure out who did the commit prefering GitHub usernames
         who = commit["author"]
