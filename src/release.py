@@ -31,8 +31,8 @@ import re
 import shlex
 import subprocess
 import sys
-from urllib.request import urlopen
 from urllib.parse import urlencode
+from urllib.request import urlopen
 
 
 DESCRIPTION = """

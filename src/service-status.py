@@ -25,8 +25,7 @@ import json
 import os
 import sys
 from urllib.parse import urlparse
-
-import requests
+from urllib.request import urlopen
 
 
 DESCRIPTION = """
@@ -83,20 +82,17 @@ def get_config():
 
 
 def fetch(url, is_json=True):
-    resp = requests.get(url)
-    if resp.status_code != 200:
-        print(url)
-        print(f"{resp.status_code}, {resp.content}")
-        raise Exception("Bad return code")
+    """Fetch data from a url
+
+    This raises URLError on HTTP request errors. It also raises JSONDecode
+    errors if it's not valid JSON.
+
+    """
+    fp = urlopen(url)
+    data = fp.read()
     if is_json:
-        try:
-            data = resp.content.strip()
-            data = data.replace(b"\n", b"")
-            return json.loads(data)
-        except json.decoder.JSONDecodeError:
-            print(data)
-            raise
-    return resp.content
+        return json.loads(data)
+    return data
 
 
 def fetch_history_from_github(main_branch, user, repo, from_sha):
