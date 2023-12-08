@@ -155,9 +155,15 @@ def get_remote_name(github_user):
     # Figure out remote to push tag to
     remote_output = check_output("git remote -v")
 
+    def check_ssh(github_user, remote_url):
+        return f":{github_user}/" in remote_url
+
+    def check_https(github_user, remote_url):
+        return f"/{github_user}/" in remote_url
+
     for line in remote_output.splitlines():
         line = line.split("\t")
-        if f":{github_user}/" in line[1]:
+        if check_ssh(github_user, line[1]) or check_https(github_user, line[1]):
             return line[0]
 
     raise Exception(f"Can't figure out remote name for {github_user}.")
