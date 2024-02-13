@@ -88,7 +88,7 @@ def fetch(url, is_json=True):
     errors if it's not valid JSON.
 
     """
-    fp = urlopen(url)
+    fp = urlopen(url, timeout=5)
     data = fp.read()
     if is_json:
         return json.loads(data)
