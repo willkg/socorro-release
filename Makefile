@@ -6,6 +6,6 @@ help:
 	@fgrep -h "##" Makefile | fgrep -v fgrep | sed 's/\(.*\):.*##/\1:  /'
 
 .PHONY: lint
-lint:  ## Lint and black reformat files
-	black src/
-	ruff src/
+lint:  ## Lint and reformat Python files
+	ruff format src/
+	ruff check src/
