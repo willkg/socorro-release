@@ -1,6 +1,6 @@
 [tool.ruff]
 line-length = 88
-src = ["src"]
+src = ["src", "tests"]
 target-version = "py38"
 
 [tool.ruff.lint]
