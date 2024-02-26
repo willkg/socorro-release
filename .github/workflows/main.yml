@@ -22,5 +22,8 @@ jobs:
 
       - name: Lint
         run: |
-          black --check src/
-          ruff src/release.py
+          make lint
+
+      - name: Test
+        run: |
+          make test

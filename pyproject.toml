@@ -16,3 +16,39 @@ docstring-quotes = "double"
 [tool.release]
 github_user = "willkg"
 github_project = "socorro-release"
+
+
+[tool.pytest.ini_options]
+filterwarnings = [
+    "error",
+]
+
+
+[tool.tox]
+legacy_tox_ini = """
+[tox]
+envlist =
+    py{38,39,310,311,312}
+    py38-lint,
+
+[gh-actions]
+python =
+    3.8: py38
+    3.9: py39
+    3.10: py310
+    3.11: py311
+    3.12: py312
+
+[testenv]
+deps =
+    -rrequirements-dev.txt
+commands =
+    pytest tests/ {posargs}
+
+[testenv:py38-lint]
+basepython = python3.8
+changedir = {toxinidir}
+commands =
+    ruff format --check src tests
+    ruff check src tests
+"""

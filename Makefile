@@ -7,5 +7,8 @@ help:
 
 .PHONY: lint
 lint:  ## Lint and reformat Python files
-	ruff format src/
-	ruff check src/
+	tox -e py38-lint
+
+.PHONY: test
+test:  ## Run tests
+	tox
