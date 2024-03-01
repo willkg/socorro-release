@@ -4,13 +4,18 @@ src = ["src", "tests"]
 target-version = "py38"
 
 [tool.ruff.lint]
-# Enable pycodestyle (E), pyflakes (F), and bugbear (B) rules
-select = ["E", "F", "B"]
+# Enable pycodestyle (E), pyflakes (F), bugbear (B), and bandit (S) rules
+select = ["E", "F", "B", "S"]
 
 ignore = ["E501"]
 
 [tool.ruff.lint.flake8-quotes]
 docstring-quotes = "double"
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["S101"]
+"src/license-check.py" = ["S603", "S607"]
+"src/release.py" = ["S310", "S603", "S607"]
 
 
 [tool.release]
